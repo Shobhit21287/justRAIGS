@@ -9,8 +9,8 @@ USER user
 WORKDIR /opt/app
 
 COPY --chown=user:user requirements.txt /opt/app
-COPY --chown=algorithm:algorithm model.pth /opt/algorithm/model.pth
-COPY --chown=algorithm:algorithm model_one_hot_encode.pth /opt/algorithm/model_one_hot_encode.pth
+COPY --chown=algorithm:algorithm C:/Users/Shobhit/Desktop/IIITacad/Sem6/ML_project/model.pth /opt/algorithm/model.pth
+COPY --chown=algorithm:algorithm C:/Users/Shobhit/Desktop/IIITacad/Sem6/ML_project/model_one_hot.pth /opt/algorithm/model_one_hot.pth
 
 RUN python -m pip install \
     --no-color \
