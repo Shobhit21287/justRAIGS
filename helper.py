@@ -113,18 +113,15 @@ def stack_inference(stack, callback):
 
 
 def write_referable_glaucoma_decision(result):
-    #with open(f"test/output/multiple-referable-glaucoma-binary.json", "w") as f:
-    with open(f"output/multiple-referable-glaucoma-binary.json", "w") as f:
+    with open(f"/output/multiple-referable-glaucoma-binary.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_referable_glaucoma_decision_likelihood(result):
-    #with open(f"test/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
-    with open(f"output/multiple-referable-glaucoma-likelihoods.json", "w") as f:        
+    with open(f"/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_glaucomatous_features(result):
-    #with open(f"test/output/stacked-referable-glaucomatous-features.json", "w") as f:
-    with open(f"output/stacked-referable-glaucomatous-features.json", "w") as f:
+    with open(f"/output/stacked-referable-glaucomatous-features.json", "w") as f:
         f.write(json.dumps(result))
