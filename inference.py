@@ -98,7 +98,10 @@ def run():
                 features2[i] = features[ct].item()
                 ct += 1
         else:
-            features2 = None
+            ct = 0
+            for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+                features2[i] = False
+                ct += 1
         
         # for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
         #     features2[i] = False
