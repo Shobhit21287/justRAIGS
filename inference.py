@@ -41,7 +41,7 @@ def run():
         nn.Linear(128,2)
     )
     model = nn.Sequential(model, custom_layer)
-    #pth = "C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\model.pth"
+    #pth = "C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model.pth"
     pth = "/opt/algorithm/model.pth"
     model.load_state_dict(torch.load(pth,map_location=torch.device('cpu')))
     model.eval()
@@ -63,7 +63,7 @@ def run():
         nn.ReLU(),
         nn.Linear(128,10),
     )
-    #model2.load_state_dict(torch.load("C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\model_one_hot.pth")) 
+    #model2.load_state_dict(torch.load("C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model_one_hot.pth")) 
     model2.load_state_dict(torch.load("/opt/algorithm/model_one_hot.pth",map_location=torch.device('cpu')))
     model2.eval()
     
@@ -82,17 +82,40 @@ def run():
         is_referable_glaucoma_likelihood = torch.sigmoid(is_referable_glaucoma_likelihood).detach().numpy()
         is_referable_glaucoma = bool(is_referable_glaucoma_likelihood[0][0] < is_referable_glaucoma_likelihood[0][1])
         is_referable_glaucoma_likelihood = float(is_referable_glaucoma_likelihood[0][1])
+        features2 = {}
         if is_referable_glaucoma:
-            features = None
+            # features = {
+            #     k: random.choice([True, False])
+            #     for k, v in DEFAULT_GLAUCOMATOUS_FEATURES.items()
+            # }
             features = model2(image)
+            probabilities=torch.sigmoid(features)
+            predicted_labels = torch.round(probabilities)
+            features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
+            print(probabilities,features)
+            ct = 0
+            for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+                features2[i] = features[ct].item()
+                ct += 1
         else:
-            features = None
+            features2 = None
+        
+        # for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+        #     features2[i] = False
+        # features = model2(image)
+        # probabilities=torch.sigmoid(features)
+        # predicted_labels = torch.round(probabilities)
+        # features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
+        # ct = 0
+        # for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+        #     features2[i] = features[ct].item()
+        #     ct += 1  
 
         # Finally, save the answer
         save_prediction(
             is_referable_glaucoma,
             is_referable_glaucoma_likelihood,
-            features,
+            features2,
         )
     return 0
 
