@@ -2,3 +2,4 @@ pillow
 SimpleITK
 imagecodecs
 numpy
+torchvision
