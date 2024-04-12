@@ -20,7 +20,7 @@ def run():
 
 
 #model=models.resnet18(pretrained=True)
-    model=models.densenet201(pretrained=True)
+    model=models.densenet201(pretrained=False)
     for parameter in model.parameters():
         parameter.requires_grad=False
     model.classifier = nn.Identity()
