@@ -42,7 +42,7 @@ def run():
     )
     model = nn.Sequential(model, custom_layer)
     #pth = "C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\model.pth"
-    pth = "model.pth"
+    pth = "/opt/algorithm/model.pth"
     model.load_state_dict(torch.load(pth))
     model.eval()
 
@@ -64,7 +64,7 @@ def run():
         nn.Linear(128,10),
     )
     #model2.load_state_dict(torch.load("C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\model_one_hot.pth")) 
-    model2.load_state_dict(torch.load("model_one_hot.pth"))
+    model2.load_state_dict(torch.load("/opt/algorithm/model_one_hot.pth"))
     model2.eval()
     
 
