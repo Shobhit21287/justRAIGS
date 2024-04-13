@@ -44,6 +44,7 @@ def run():
     #pth = "C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model.pth"
     pth = "/opt/algorithm/model.pth"
     model.load_state_dict(torch.load(pth,map_location=torch.device('cpu')))
+    #model.load_state_dict(torch.load("/mnt/c/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/model.pth")) 
     model.eval()
 
     model2=models.resnet18(pretrained=False)
@@ -64,6 +65,7 @@ def run():
         nn.Linear(128,10),
     )
     #model2.load_state_dict(torch.load("C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model_one_hot.pth")) 
+    #model2.load_state_dict(torch.load("/mnt/c/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/model_one_hot.pth")) 
     model2.load_state_dict(torch.load("/opt/algorithm/model_one_hot.pth",map_location=torch.device('cpu')))
     model2.eval()
     
@@ -86,7 +88,7 @@ def run():
         features = model2(image)
         probabilities=torch.sigmoid(features)
         predicted_labels = torch.round(probabilities)
-        features = predicted_labels.detach().numpy()[0].astype(int)
+        features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
         #print(probabilities,features)
         ct = 0
         for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
