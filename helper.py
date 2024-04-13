@@ -129,3 +129,4 @@ def write_glaucomatous_features(result):
     #with open(test + "/output/stacked-referable-glaucomatous-features.json", "w") as f:
     with open(f"/output/stacked-referable-glaucomatous-features.json", "w") as f:
         f.write(json.dumps(result))
+        print(result)

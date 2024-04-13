@@ -86,7 +86,7 @@ def run():
         features = model2(image)
         probabilities=torch.sigmoid(features)
         predicted_labels = torch.round(probabilities)
-        features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
+        features = predicted_labels.detach().numpy()[0].astype(int)
         #print(probabilities,features)
         ct = 0
         for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
