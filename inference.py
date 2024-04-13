@@ -70,7 +70,7 @@ def run():
 
     # model_one_hot_encode = torch.load("model_multilabel.pth")
     # model_one_hot_encode.eval()
-
+    
     for jpg_image_file_name, save_prediction in inference_tasks():
         # Do inference, possibly something better performant
         print(f"Running inference on {jpg_image_file_name}")
@@ -92,16 +92,17 @@ def run():
             probabilities=torch.sigmoid(features)
             predicted_labels = torch.round(probabilities)
             features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
-            print(probabilities,features)
+            #print(probabilities,features)
             ct = 0
             for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
                 features2[i] = features[ct].item()
                 ct += 1
         else:
-            ct = 0
-            for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
-                features2[i] = False
-                ct += 1
+            features2 = None
+        #     ct = 0
+        #     for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+        #         features2[i] = False
+        #         ct += 1
         
         # for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
         #     features2[i] = False

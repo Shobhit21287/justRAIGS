@@ -21,7 +21,8 @@ DEFAULT_GLAUCOMATOUS_FEATURES = {
 
 
 def inference_tasks():
-    #input_files = [x for x in Path("test/input").rglob("*") if x.is_file()]
+    #test = "C:/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/Example algorithm/test"
+    #input_files = [x for x in Path(test + "/input").rglob("*") if x.is_file()]
     input_files = [x for x in Path("/input").rglob("*") if x.is_file()]
 
     print("Input Files:")
@@ -111,17 +112,20 @@ def stack_inference(stack, callback):
             # Call back that saves the result
             yield image, callback
 
-
+#test = "C:/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/Example algorithm/test"
 def write_referable_glaucoma_decision(result):
+    #with open(test + "/output/multiple-referable-glaucoma-binary.json", "w") as f:
     with open(f"/output/multiple-referable-glaucoma-binary.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_referable_glaucoma_decision_likelihood(result):
+    #with open(test + "/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
     with open(f"/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_glaucomatous_features(result):
+    #with open(test + "/output/stacked-referable-glaucomatous-features.json", "w") as f:
     with open(f"/output/stacked-referable-glaucomatous-features.json", "w") as f:
         f.write(json.dumps(result))
