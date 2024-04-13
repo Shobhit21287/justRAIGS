@@ -83,26 +83,26 @@ def run():
         is_referable_glaucoma = bool(is_referable_glaucoma_likelihood[0][0] < is_referable_glaucoma_likelihood[0][1])
         is_referable_glaucoma_likelihood = float(is_referable_glaucoma_likelihood[0][1])
         features2 = {}
-        if is_referable_glaucoma:
-            # features = {
-            #     k: random.choice([True, False])
-            #     for k, v in DEFAULT_GLAUCOMATOUS_FEATURES.items()
-            # }
-            features = model2(image)
-            probabilities=torch.sigmoid(features)
-            predicted_labels = torch.round(probabilities)
-            features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
-            #print(probabilities,features)
-            ct = 0
-            for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
-                features2[i] = features[ct].item()
-                ct += 1
-        else:
-            features2 = None
-        #     ct = 0
-        #     for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
-        #         features2[i] = False
-        #         ct += 1
+        features = model2(image)
+        probabilities=torch.sigmoid(features)
+        predicted_labels = torch.round(probabilities)
+        features = predicted_labels.detach().numpy()[0].astype(int).astype(bool)
+        #print(probabilities,features)
+        ct = 0
+        for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+            features2[i] = features[ct].item()
+            ct += 1
+        # if is_referable_glaucoma:
+        #     # features = {
+        #     #     k: random.choice([True, False])
+        #     #     for k, v in DEFAULT_GLAUCOMATOUS_FEATURES.items()
+        #     # }
+        # else:
+        #     features2 = None
+        # #     ct = 0
+        # #     for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
+        # #         features2[i] = False
+        # #         ct += 1
         
         # for i in DEFAULT_GLAUCOMATOUS_FEATURES.keys():
         #     features2[i] = False
