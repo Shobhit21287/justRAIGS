@@ -114,23 +114,21 @@ def stack_inference(stack, callback):
             # Call back that saves the result
             yield image, callback
 
-current_dir = os.getcwd()
-
 #test = "C:/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/Example algorithm/test"
 test = "/mnt/c/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/Example algorithm/test"
 def write_referable_glaucoma_decision(result):
     #with open(test + "/output/multiple-referable-glaucoma-binary.json", "w") as f:
-    with open(current_dir + "/output/multiple-referable-glaucoma-binary.json", "w") as f:
+    with open("/output/multiple-referable-glaucoma-binary.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_referable_glaucoma_decision_likelihood(result):
     #with open(test + "/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
-    with open(current_dir + "/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
+    with open("/output/multiple-referable-glaucoma-likelihoods.json", "w") as f:
         f.write(json.dumps(result))
 
 
 def write_glaucomatous_features(result):
     #with open(test + "/output/stacked-referable-glaucomatous-features.json", "w") as f:
-    with open(current_dir + "/output/stacked-referable-glaucomatous-features.json", "w") as f:
+    with open("/output/stacked-referable-glaucomatous-features.json", "w") as f:
         f.write(json.dumps(result))
