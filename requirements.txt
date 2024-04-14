@@ -3,3 +3,4 @@ SimpleITK
 imagecodecs
 numpy
 torchvision
+tifffile
