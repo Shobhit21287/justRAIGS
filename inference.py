@@ -17,6 +17,11 @@ def run():
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
+    # test_transform_2=transforms.Compose([
+            # transforms.Resize((64, 64)),
+            # transforms.ToTensor(),
+            # transforms.Normalize(mean=0.485, std=0.229)
+        # ])
 
 
 #model=models.resnet18(pretrained=True)
@@ -41,10 +46,10 @@ def run():
         nn.Linear(128,2)
     )
     model = nn.Sequential(model, custom_layer)
-    #pth = "C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model.pth"
+    # pth = "/Users/chaitanyadua/Downloads/justRAIGS-main/model.pth"
     pth = "/opt/algorithm/model.pth"
     model.load_state_dict(torch.load(pth,map_location=torch.device('cpu')))
-    #model.load_state_dict(torch.load("/mnt/c/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/model.pth")) 
+    # model.load_state_dict(torch.load("/Users/chaitanyadua/Downloads/justRAIGS-main/model.pth",map_location=torch.device('cpu'))) 
     model.eval()
 
     model2=models.resnet18(pretrained=False)
@@ -65,7 +70,7 @@ def run():
         nn.Linear(128,10),
     )
     #model2.load_state_dict(torch.load("C:\\Users\\Shobhit\\Desktop\\IIITacad\\Sem6\\ML_project\\sample\\model_one_hot.pth")) 
-    #model2.load_state_dict(torch.load("/mnt/c/Users/Shobhit/Desktop/IIITacad/sem6/ML_project/sample/model_one_hot.pth")) 
+    # model2.load_state_dict(torch.load("/Users/chaitanyadua/Downloads/justRAIGS-main/model_one_hot.pth",map_location=torch.device('cpu'))) 
     model2.load_state_dict(torch.load("/opt/algorithm/model_one_hot.pth",map_location=torch.device('cpu')))
     model2.eval()
     
@@ -78,8 +83,21 @@ def run():
         print(f"Running inference on {jpg_image_file_name}")
         # For example: use Pillow to read the jpg file and convert it to a NumPY array:
         image = Image.open(jpg_image_file_name)
-        image = test_transform(image)
+        image_array=numpy.array(image)
+        if(image_array.ndim==2):
+            # pil_image = Image.fromarray(image_array)
+            # image=test_transform_2(pil_image)
+            rgb_image = numpy.zeros((3,image_array.shape[0], image_array.shape[1]))
+            rgb_image[0, :, :] = image_array
+            rgb_image[1, :, :] = image_array
+            rgb_image[2, :, :] = image_array
+            pil_image = Image.fromarray(rgb_image,mode='RGB')
+            image = test_transform(pil_image)
+        else:
+            image = test_transform(image)
         image = image.unsqueeze(0)
+        # print(image.shape)
+        # image = image.unsqueeze(0)
         is_referable_glaucoma_likelihood = model(image)
         is_referable_glaucoma_likelihood = torch.sigmoid(is_referable_glaucoma_likelihood).detach().numpy()
         is_referable_glaucoma = bool(is_referable_glaucoma_likelihood[0][0] < is_referable_glaucoma_likelihood[0][1])
