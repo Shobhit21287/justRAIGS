@@ -1,5 +1,6 @@
 pillow
 SimpleITK
+imagecodecs
 numpy
 torchvision
 tifffile
